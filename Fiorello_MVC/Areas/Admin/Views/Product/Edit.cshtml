@@ -1,0 +1,56 @@
+﻿@model ProductEditVM
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<section id="edit-product">
+    <div class="container mt-5">
+        <form class="forms-sample" method="post" asp-action="Edit" enctype="multipart/form-data">
+            <div class="form-group">
+                <label class="float-label">Name</label>
+                <input asp-for="Name" class="form-control">
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="float-label">Description</label>
+                <input asp-for="Description" class="form-control">
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="float-label">Price</label>
+                <input asp-for="Price" type="number" step="any" class="form-control">
+            </div>
+            <div class="images">
+                <h3>Available Images</h3>
+                <div class="d-flex" style="gap:25px;">
+                    @foreach (var item in Model.AvailableImages)
+                    {
+                        <div style="width:150px;" class="product-card" data-id="@item.Id">
+                            <img src="~/img/@item.Name" style="width:150px; height:150px;" />
+                            <div>
+                                <button type="button" data-id="@item.Id" class="btn btn-danger btn-sm delete" @(item.isMain ? "disabled" : "") >Delete</button>
+                                <button type="button" data-id="@item.Id" class="btn btn-primary btn-sm make-main">Make Main</button>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="float-label">Image</label>
+                <input asp-for="Images" accept="image/*" class="form-control">
+            </div>
+            <div class="form-group">
+                <label class="float-label">Category</label>
+                <select class="form-control" asp-for="CategoryId" asp-items="@ViewBag.Categories"></select>
+            </div>
+            <button type="submit" class="btn btn-primary mr-2">Submit</button>
+            <a class="btn btn-light" asp-action="Index">Cancel</a>
+        </form>
+    </div>
+</section>
+
+@section js {
+    <script src="~/Admin/assets/js/edit.js"></script>
+}
+
+

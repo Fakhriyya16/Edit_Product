@@ -1,0 +1,37 @@
+﻿@model TotalBasketVM
+@{
+    ViewData["Title"] = "Index";
+}
+
+<section id="products-in-cart">
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Image</th>
+                <th scope="col">Name</th>
+                <th scope="col">Description</th>
+                <th scope="col">Category</th>
+                <th scope="col">Price</th>
+                <th scope="col">Count</th>
+                <th scope="col">Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Products)
+            {
+                <tr class="product-row" data-id="@item.Id">
+                    <th scope="row"><img src="~/img/@item.Image" width="100px" height="100px" /></th>
+                    <td>@item.Name</td>
+                    <td>@item.Description</td>
+                    <td>@item.Category</td>
+                    <td>@item.Price</td>
+                    <td class="item-count"><button class="decrease btn btn-outline-primary" data-id="@item.Id">-</button><span class="count-display">@item.Count</span><button class="increase btn btn-outline-primary" data-id="@item.Id">+</button></td>
+                    <td>
+                        <button class="delete-product" data-id="@item.Id">Delete</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</section>
+<h2 class="text-end total">Total Price: @Model.TotalPrice</h2>

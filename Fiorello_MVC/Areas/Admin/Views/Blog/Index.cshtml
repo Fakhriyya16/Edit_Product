@@ -1,0 +1,39 @@
+﻿@model IEnumerable<BlogTableVM>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2 class="text-center mt-3">Categories</h2>
+<a class="btn btn-success text-white btn-md mx-3" asp-action="Create"><i class="ti-plus"></i></a>
+<table class="table table-hover mt-2 mx-3">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Created Date</th>
+            <th>Description</th>
+            <th>Operations</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <div class="d-inline-block align-middle">
+                        <p>@item.Title</p>
+                    </div>
+                </td>
+                <td>@item.CreatedDate</td>
+                <td>@item.Description</td>
+                <td>
+                    <a asp-action="Detail" asp-route-id="@item.Id" class="btn btn-primary text-white btn-sm"><i class="ti-info-alt"></i></a>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning text-white btn-sm"><i class="ti-pencil"></i></a>
+                    <form method="post" asp-action="Delete" asp-route-id="@item.Id" class="d-inline">
+                        <button type="submit" class="btn btn-danger text-white btn-sm"><i class="ti-trash"></i></button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

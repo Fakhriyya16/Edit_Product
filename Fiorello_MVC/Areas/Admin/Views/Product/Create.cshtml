@@ -1,0 +1,36 @@
+﻿@model ProductCreateVM
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="container mt-5">
+    <form class="forms-sample" method="post" asp-action="Create" enctype="multipart/form-data">
+        <div class="form-group">
+            <label class="float-label">Name</label>
+            <input asp-for="Name" class="form-control">
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label class="float-label">Description</label>
+            <input asp-for="Description" class="form-control">
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label class="float-label">Price</label>
+            <input asp-for="Price" type="number"  step="any" class="form-control">
+            <span asp-validation-for="Price" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label class="float-label">Image</label>
+            <input asp-for="Images" accept="image/*" class="form-control">
+            <span asp-validation-for="Images" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label class="float-label">Category</label>
+            <select class="form-control" asp-for="CategoryId" asp-items="@ViewBag.Categories"></select>
+        </div>
+        <button type="submit" class="btn btn-primary mr-2">Submit</button>
+        <a class="btn btn-light" asp-action="Index">Cancel</a>
+    </form>
+</div>
+

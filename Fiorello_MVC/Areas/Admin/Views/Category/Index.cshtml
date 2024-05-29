@@ -1,0 +1,60 @@
+﻿@model Paginate<CategoryProductVM>
+@{
+    ViewData["Title"] = "Index";
+}
+<section id="archive">
+    <h2 class="text-center mt-3">Categories</h2>
+    <a class="btn btn-success text-white btn-md mx-3" asp-action="Create"><i class="ti-plus"></i></a>
+    <table class="table table-hover mt-2 mx-3">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Created Date</th>
+                <th>Product Count</th>
+                <th>Operations</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Datas)
+            {
+                <tr class="category-data" data-id="@item.Id">
+                    <td>
+                        <div class="d-inline-block align-middle">
+                            <p>@item.CategoryName</p>
+                        </div>
+                    </td>
+                    <td>@item.CreatedDate</td>
+                    <td>@item.ProductCount</td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary text-white btn-sm"><i class="ti-info-alt"></i></a>
+                        <a class="btn btn-warning text-white btn-sm"><i class="ti-pencil"></i></a>
+                        <form method="post" asp-action="Delete" asp-route-id="@item.Id" class="d-inline">
+                            <button type="submit" class="btn btn-danger text-white btn-sm"><i class="ti-trash"></i></button>
+                        </form>
+                        <a class="btn btn-secondary text-white btn-sm add-archive" data-id="@item.Id"><i class="ti-archive"></i></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="pagination-area d-flex justify-content-center mt-3">
+        <nav aria-label="...">
+            <ul class="pagination">
+                <li class="page-item @(Model.HasPrevious ? "" : "disabled")">
+                    <a class="page-link" asp-action="Index" asp-route-page="@(Model.CurrentPage - 1)" tabindex="-1">Previous</a>
+                </li>
+                @for (int i = 1; i <= Model.TotalPage; i++)
+                {
+                    <li class="page-item @(Model.CurrentPage == i ? "disabled" : "")"><a class="page-link @(Model.CurrentPage == i ? "paginate-active" : "")" asp-action="Index" asp-route-page="@i">@i</a></li>
+                }
+                <li class="page-item @(Model.HasNext ? "" : "disabled")">
+                    <a class="page-link" asp-action="Index" asp-route-page="@(Model.CurrentPage + 1)">Next</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</section>
+
+@section js{
+    <script src="~/Admin/assets/js/archive.js"></script>
+}

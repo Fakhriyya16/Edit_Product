@@ -1,0 +1,39 @@
+﻿@model CategoryDetailVM
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="container">
+    <main role="main">
+
+        <section class="jumbotron text-center">
+            <div class="container">
+                <h1 class="jumbotron-heading">@Model.Name</h1>
+                <p>Created Date: @Model.CreatedDate</p>
+                <a asp-action="Index" type="button" class="btn btn-sm btn-outline-secondary mt-1">Back</a>
+            </div>
+        </section>
+
+        <div class="album py-5 bg-light">
+            <div class="container">
+                <div class="row">
+                    @foreach (var item in Model.Products)
+                    {
+                        <div class="col-md-4">
+                            <div class="card mb-4 box-shadow">
+                                <img class="card-img-top" src="~/img/@item.ProductImages.FirstOrDefault(m=>m.isMain).Name">
+                                <div class="card-body">
+                                    <h4>@item.Name</h4>
+                                    <p class="card-text">@item.Description</p>
+                                    <p class="card-text">Created Date: @item.CreatedDate.ToString("dd.MM.yyyy")</p>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+    </main>
+</div>
+

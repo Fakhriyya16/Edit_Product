@@ -1,0 +1,28 @@
+﻿@model BlogDetailVM
+@{
+    ViewData["Title"] = "Detail";
+}
+
+<div class="container">
+    <main role="main">
+        <div class="album py-5 bg-light">
+            <div class="container">
+                <a asp-action="Index" type="button" class="btn btn-sm btn-outline-secondary mt-1">Back</a>
+                <div class="row mt-5">
+                     <div class="col-md-4">
+                          <div class="card mb-4 box-shadow">
+                               <img class="card-img-top" src="~/img/@Model.Image">
+                               <div class="card-body">
+                                   <h4>@Model.Title</h4>
+                                   <p class="card-text">@Model.Description</p>
+                                   <p class="card-text">Created Date: @Model.CreatedDate</p>
+                               </div>
+                          </div>
+                     </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+</div>
+
